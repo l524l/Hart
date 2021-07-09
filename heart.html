@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0 user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>heart</title>
+</head>
+<style>
+html, body {
+  position: relative;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+}
+.container {
+  display: grid;
+  width: 100%;
+  height: 100%;
+}
+.heart-box {
+  margin: auto;
+}
+body:hover #myCanvas {
+  visibility: visible;
+  opacity: 1;
+}
+body #myCanvas {
+  visibility: hidden;
+  transition-duration: 0.5s;
+  opacity: 0;
+}
+#myCanvas {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+#myCanvas circle {
+  filter: blur(70px) drop-shadow(0px 0px 50px #FF1100);
+}
+#cardio {
+  fill: #f44336;
+}
+#heart {
+  max-width: 100%;
+  filter: blur(6px) drop-shadow(0px 0px 200px #FF1100);
+  animation: bits 1s infinite ease-in;
+  transform: scale(0.5);
+}
+@keyframes bits {
+  0% {
+    transform: scale(0.5);
+  }
+  50% {
+    filter: blur(1px) drop-shadow(0px 0px 100px #FF1100);
+    transform: scale(0.8);
+  }
+  0% {
+    transform: scale(0.5);
+  }
+}
+.text {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  color: #000;
+  font-size: 72px;
+  z-index: 99;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+@media (max-width: 450px) {
+  .text {
+    display: none;
+  }
+}
+</style>
+<body>
+  <svg id="myCanvas"  height="512"  width="512">
+    <circle id="point" cx="1000px" cy="1000px" r="50px" fill="#F44336"/>
+  </svg>
+  <div class="container">
+    <div class="text">
+      <span>What is love?</span>
+    </div>
+    <div class="heart-box">
+      <svg id="heart" enable-background="new 0 0 24 24" height="512" viewBox="0 0 24 24" width="512" xmlns="http://www.w3.org/2000/svg">
+        <path d="m11.466 22.776c.141.144.333.224.534.224s.393-.08.534-.224l9.594-9.721c4.001-4.053 1.158-11.055-4.532-11.055-3.417 0-4.985 2.511-5.596 2.98-.614-.471-2.172-2.98-5.596-2.98-5.672 0-8.55 6.984-4.531 11.055z" fill="#f44336"/>
+      </svg>
+    </div>
+    <div class="text">
+      <span>made by l524l</span>
+    </div>
+  </div>
+</body>
+<script type="text/javascript">
+  var c = document.querySelector("#point");
+  var body = document.querySelector("body");
+  body.addEventListener("mousemove", setMousePosition, false);
+  body.addEventListener("touchmove", setMousePosition, false);
+  body.addEventListener("click",  fullscreen3, true);
+  function setMousePosition(e) {
+    if(e.type == "touchmove"){
+      c.setAttribute("cx", e.changedTouches[0].clientX);
+      c.setAttribute("cy", e.changedTouches[0].clientY);
+    }else {
+      c.setAttribute("cx", e.clientX);
+      c.setAttribute("cy", e.clientY);
+    }
+  }
+  var fullscreenmode = false;
+  function fullscreen3() {
+    if (!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+      if (!fullscreenmode) {
+        if(body.requestFullScreen) {
+          document.webkitCancelFullScreen();
+          fullscreenmode = true;
+        } else if(body.mozRequestFullScreen) {
+          document.mozCancelFullScreen();
+          fullscreenmode = true;
+        } else if(body.webkitRequestFullScreen) {
+          body.webkitRequestFullScreen();
+          fullscreenmode = true;
+        }
+      }else {
+        document.webkitCancelFullScreen();
+        fullscreenmode = false;
+      }
+    }
+  }
+</script>
+</html>
